@@ -9,4 +9,5 @@ type User struct {
 	Name     string
 	Email    string
 	Password string
+	Comment  []Comment `gorm:"foreignKey:UserRefer"`
 }

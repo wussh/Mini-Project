@@ -6,6 +6,7 @@ import (
 
 type Phone struct {
 	gorm.Model
+	Name       string
 	Price      string
 	Design     string
 	Display    string
@@ -14,4 +15,5 @@ type Phone struct {
 	Audio      string
 	Battery    string
 	Features   string
+	Comment    []Comment `gorm:"foreignKey:PhoneRefer"`
 }
