@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"kentang/config"
 	"kentang/formatter"
 	"kentang/models"
@@ -13,7 +14,7 @@ func CreateCommentController(c echo.Context) error {
 	DB := config.Connect()
 	comment := models.Comment{}
 	c.Bind(&comment)
-
+	fmt.Println(comment)
 	if err := DB.Save(&comment).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -40,5 +41,14 @@ func UpdateCommentController(c echo.Context) error {
 	comment.Context = payload.Context
 	DB.Save(&comment)
 
+	return c.JSON(http.StatusOK, formatter.SuccessResponse(comment))
+}
+func GetPhoneCommentController(c echo.Context) error {
+	DB := config.Connect()
+	var comment []models.Comment
+
+	if err := DB.Find(&comment).Error; err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
 	return c.JSON(http.StatusOK, formatter.SuccessResponse(comment))
 }

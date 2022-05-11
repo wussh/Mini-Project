@@ -1,0 +1,31 @@
+services:
+
+  app:
+    container_name: "reviewhp"
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+
+  db:
+    container_name: "reviewhpdb"
+    image: bitnami/mysql
+    restart: unless-stopped
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=kentang
+      - MYSQL_DATABASE=reviewhp
+    healthcheck:
+      test: ["CMD", "mysql", "-u", "root",  "-pkentang", "-e", "show schemas"]
+      interval: 10s 
+
+  adminer:
+    container_name: "reviewhpadmin"
+    image: adminer
+    restart: unless-stopped
+    ports:
+      - 8081:8080

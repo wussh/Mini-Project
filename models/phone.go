@@ -15,5 +15,5 @@ type Phone struct {
 	Audio      string    `json:"audio" form:"audio"`
 	Battery    string    `json:"battery" form:"battery"`
 	Features   string    `json:"features" form:"features"`
-	Comment    []Comment `gorm:"foreignKey:PhoneNumber;references:Name"`
+	Comment    []Comment `gorm:"foreignKey:PhoneId;references:Name"`
 }

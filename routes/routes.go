@@ -24,6 +24,7 @@ func New() *echo.Echo {
 
 	e.GET("/handphone", c.GetPhonesController)
 	e.GET("/handphone/:id", c.GetPhoneController)
+	e.GET("/handphone/comment", c.GetPhoneCommentController)
 
 	jwtAuth := e.Group("/jwt/redirected")
 	jwtAuth.Use(middleware.JWT([]byte(key.SECRET_JWT)))
@@ -32,7 +33,7 @@ func New() *echo.Echo {
 	jwtAuth.GET("/users/:id", c.GetUserController)
 	jwtAuth.DELETE("/users/:id", c.DeleteUserController)
 	jwtAuth.PUT("/users/:id", c.UpdateUserController)
-	jwtAuth.POST("/handphone/:id/comment", c.CreateCommentController)
-	jwtAuth.PUT("/handphone/:id/comment", c.UpdateCommentController)
+	jwtAuth.POST("/handphone/comment", c.CreateCommentController)
+	jwtAuth.PUT("/handphone/comment", c.UpdateCommentController)
 	return e
 }
