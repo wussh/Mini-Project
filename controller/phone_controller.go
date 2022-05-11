@@ -10,6 +10,20 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+func CreatePhoneController(c echo.Context) error {
+	DB := config.Connect()
+	phone := models.Phone{}
+	c.Bind(&phone)
+
+	if err := DB.Save(&phone).Error; err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"message": "success create new phone",
+		"phone":   phone,
+	})
+}
+
 func GetPhonesController(c echo.Context) error {
 	DB := config.Connect()
 	var phones []models.Phone
@@ -31,17 +45,6 @@ func GetPhoneController(c echo.Context) error {
 		return c.JSON(http.StatusNotFound, formatter.NotFoundResponse(nil))
 	}
 
-	return c.JSON(http.StatusOK, formatter.SuccessResponse(phone))
-}
-
-func CreatePhoneController(c echo.Context) error {
-	DB := config.Connect()
-	phone := models.Phone{}
-	c.Bind(&phone)
-
-	if err := DB.Save(&phone).Error; err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-	}
 	return c.JSON(http.StatusOK, formatter.SuccessResponse(phone))
 }
 

@@ -6,8 +6,8 @@ import (
 
 type User struct {
 	gorm.Model
-	Name     string
-	Email    string
-	Password string
-	Comment  []Comment `gorm:"foreignKey:UserRefer"`
+	Name     string    `json:"name" form:"name"`
+	Email    string    `json:"email" form:"email"`
+	Password string    `json:"password" form:"password"`
+	Comment  []Comment `gorm:"foreignKey:UserNumber;references:Name"`
 }

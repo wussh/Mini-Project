@@ -6,7 +6,7 @@ import (
 
 type Comment struct {
 	gorm.Model
-	UserRefer  uint
-	PhoneRefer uint
-	Context    string
+	UserNumber  string
+	PhoneNumber string
+	Context     string `json:"context" form:"context"`
 }

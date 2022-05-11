@@ -18,6 +18,8 @@ func New() *echo.Echo {
 
 	e.POST("/auth/login", c.LoginController)
 
+	e.POST("/handphone", c.CreatePhoneController)
+
 	e.POST("/users", c.CreateUserController)
 
 	e.GET("/handphone", c.GetPhonesController)
@@ -30,7 +32,7 @@ func New() *echo.Echo {
 	jwtAuth.GET("/users/:id", c.GetUserController)
 	jwtAuth.DELETE("/users/:id", c.DeleteUserController)
 	jwtAuth.PUT("/users/:id", c.UpdateUserController)
-	// jwtAuth.POST("/handphone/:id/comment")
-	// jwtAuth.PUT("/handphone/:id/comment")
+	jwtAuth.POST("/handphone/:id/comment", c.CreateCommentController)
+	jwtAuth.PUT("/handphone/:id/comment", c.UpdateCommentController)
 	return e
 }
