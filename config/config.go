@@ -8,7 +8,7 @@ import (
 )
 
 func Connect() *gorm.DB {
-	connectionString := "root:minato123@tcp(127.0.0.1:3306)/reviewhp?charset=utf8mb4&parseTime=True&loc=Local"
+	connectionString := "root:kentang@tcp(reviewhpdb:3306)/reviewhp?charset=utf8mb4&parseTime=True&loc=Local"
 
 	var err error
 	DB, err := gorm.Open(mysql.Open(connectionString), &gorm.Config{})
