@@ -13,7 +13,7 @@ func New() *echo.Echo {
 	e := echo.New()
 	// Welcome Page
 	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Welcome To Review HP")
+		return c.String(http.StatusOK, "Misa Jago Change")
 	})
 
 	e.POST("/auth/login", c.LoginController)
