@@ -13,7 +13,7 @@ func New() *echo.Echo {
 	e := echo.New()
 	// Welcome Page
 	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Misa Jago Change")
+		return c.String(http.StatusOK, "Welcome to Review HP")
 	})
 
 	e.POST("/auth/login", c.LoginController)
@@ -24,7 +24,7 @@ func New() *echo.Echo {
 
 	e.GET("/handphone", c.GetPhonesController)
 	e.GET("/handphone/:id", c.GetPhoneController)
-	e.GET("/handphone/comment", c.GetPhoneCommentController)
+	e.POST("/comparison", c.GetComparisonController)
 
 	jwtAuth := e.Group("/jwt/redirected")
 	jwtAuth.Use(middleware.JWT([]byte(key.SECRET_JWT)))
@@ -33,7 +33,6 @@ func New() *echo.Echo {
 	jwtAuth.GET("/users/:id", c.GetUserController)
 	jwtAuth.DELETE("/users/:id", c.DeleteUserController)
 	jwtAuth.PUT("/users/:id", c.UpdateUserController)
-	jwtAuth.POST("/handphone/comment", c.CreateCommentController)
-	jwtAuth.PUT("/handphone/comment", c.UpdateCommentController)
+	jwtAuth.POST("/comment", c.CreateCommentController)
 	return e
 }
