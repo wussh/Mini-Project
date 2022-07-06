@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-    # # Hanya men-trigger action jika ada perubahan di folder /controller
-    # paths:
-    #   - controller/**
 
 jobs:
 
